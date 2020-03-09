@@ -1,0 +1,10 @@
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/bin/Debug/netcoreapp3.1/studentexcercises.deps.json
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/bin/Debug/netcoreapp3.1/studentexcercises.runtimeconfig.json
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/bin/Debug/netcoreapp3.1/studentexcercises.runtimeconfig.dev.json
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/bin/Debug/netcoreapp3.1/studentexcercises.dll
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/bin/Debug/netcoreapp3.1/studentexcercises.pdb
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/obj/Debug/netcoreapp3.1/studentexcercises.csprojAssemblyReference.cache
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/obj/Debug/netcoreapp3.1/studentexcercises.AssemblyInfoInputs.cache
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/obj/Debug/netcoreapp3.1/studentexcercises.AssemblyInfo.cs
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/obj/Debug/netcoreapp3.1/studentexcercises.dll
+/Users/williammetcalf/workspace/csharp/StudentExercises/studentexcercises/obj/Debug/netcoreapp3.1/studentexcercises.pdb

@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace studentexcercises
 {
+  class CohortReport
+  {
+    public string Name { get; set; }
+    public int CohortCount { get; set; }
+  }
   class Program
   {
     static void Main(string[] args)
     {
       List<Exercise> TheExercises = new List<Exercise>();
       List<Student> TheStudents = new List<Student>();
+      List<Instructor> TheInstructors = new List<Instructor>();
 
       Student Willy = new Student("Willy", "Metcalf", "3k", "C37");
       Student James = new Student("James", "Nitz", "James", "C3");
       Student Audrey = new Student("Audrey", "Borgra", "3k", "C37");
       Student Kevin = new Student("Kevin", "Penny", "PocketChange", "E7");
+      Student Namita = new Student("Namita", "Manohar", "Namita", "E7");
 
       TheStudents.Add(Willy);
       TheStudents.Add(James);
       TheStudents.Add(Audrey);
       TheStudents.Add(Kevin);
+      TheStudents.Add(Namita);
 
 
       Exercise Students = new Exercise("Students", "C#");
@@ -39,6 +48,10 @@ namespace studentexcercises
       Instructor Leah = new Instructor("Leah", "Hoefling", "Chortlehoort", "C3", "Lemurs");
       Instructor Mo = new Instructor("Mo", "Silvera", "MoMoney", "E7", "Planning");
 
+      TheInstructors.Add(Steve);
+      TheInstructors.Add(Mo);
+      TheInstructors.Add(Leah);
+
       C37.AddStudentToCohort(Willy, C37);
       C37.AddStudentToCohort(Audrey, C37);
       C37.AddInstructorToCohort(Steve, C37);
@@ -52,8 +65,10 @@ namespace studentexcercises
 
       Steve.AddExcerciseToStudent(Willy, TrestleBridge);
       Steve.AddExcerciseToStudent(Willy, Bangazon);
+      Steve.AddExcerciseToStudent(Willy, Nutshell);
       Steve.AddExcerciseToStudent(Audrey, Bangazon);
       Steve.AddExcerciseToStudent(Audrey, Students);
+      Steve.AddExcerciseToStudent(Audrey, Nutshell);
 
       Leah.AddExcerciseToStudent(James, Nutshell);
       Leah.AddExcerciseToStudent(James, Students);
@@ -80,13 +95,13 @@ namespace studentexcercises
       foreach (Exercise exercise in TheExercises)
       {
         Console.WriteLine($"{exercise.Name}");
-        Console.WriteLine($"-------------------------------");
+        Console.WriteLine($"-----------------");
         foreach (Student student in TheStudents)
         {
 
           foreach (Exercise exer in student.Exercises)
           {
-            if (exer.Name == exercise.Name)
+            if (exer == exercise)
             {
               hasExercise = true;
             }
@@ -99,6 +114,75 @@ namespace studentexcercises
         }
         Console.WriteLine($"");
 
+      }
+
+
+
+      //part 2
+
+      List<Exercise> JavascriptExercises = TheExercises.Where(exercise => exercise.Language == "JS").ToList();
+      Console.WriteLine("Javascript Exercises");
+      foreach (var exer in JavascriptExercises)
+      {
+        Console.WriteLine($"{exer.Name}");
+      }
+
+      var C37Students = TheStudents.Where(student => student.Cohort == "C37").ToList();
+      var C37Instructors = TheInstructors.Where(inst => inst.Cohort == "C37").ToList();
+
+
+      Console.WriteLine("C37 students");
+      foreach (var student in C37Students)
+      {
+        Console.WriteLine($"{student.FirstName}{student.LastName}");
+      }
+      Console.WriteLine("C37 instructors");
+      foreach (var inst in C37Instructors)
+      {
+        Console.WriteLine($"{inst.SlackHandle}");
+      }
+
+
+      Console.WriteLine("Students sorted by last name");
+      var sortedStudents = TheStudents.OrderBy(student => student.LastName);
+      foreach (var stu in sortedStudents)
+      {
+        Console.WriteLine($"{stu.FirstName} {stu.LastName}");
+
+      }
+
+      var StudentExerciseCount = TheStudents.Select(student => student.Exercises.Count);
+      Console.WriteLine($"Lazy students with no exercises");
+      var studentsWithNoExercises = TheStudents.Where(student => student.Exercises.Count == 0);
+      foreach (var stu in studentsWithNoExercises)
+      {
+        Console.WriteLine($"{stu.FirstName} {stu.LastName}");
+
+      }
+      Console.WriteLine($"The best students");
+      var studentsWithMostExcercises = TheStudents.Where(student => student.Exercises.Count == StudentExerciseCount.Max());
+      Console.WriteLine($"With {StudentExerciseCount.Max()} Exercises");
+      foreach (var stu in studentsWithMostExcercises)
+      {
+        Console.WriteLine($"{stu.FirstName} {stu.LastName}");
+
+      }
+
+
+
+      var studentsInCohorts = TheStudents.GroupBy(stu => stu.Cohort)
+          .Select(stu =>
+          {
+            return new CohortReport
+            {
+              Name = stu.Key,
+              CohortCount = stu.Count()
+            };
+          });
+
+      foreach (var report in studentsInCohorts)
+      {
+        Console.WriteLine($"{report.Name} {report.CohortCount}");
       }
 
     }
